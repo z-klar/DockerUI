@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'cz.zk'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    manifest {
+        attributes( 'Main-Class': 'frmMain', 'Manifest-Version':'1.01' )
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.intellij', name: 'forms_rt', version: '7.0.3'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+//    compile 'org.jbundle.util.osgi.wrapped:jbundle-util-osgi-wrapped-reactor:1.0.5'
+//    compile group: 'org.wso2.apache.httpcomponents', name: 'httpclient', version: '4.3.1.wso2v1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.10'
+
+}
